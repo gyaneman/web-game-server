@@ -5,6 +5,8 @@ io = require('socket.io')(http)
 path = require('path')
 mongodb = require('mongodb')
 
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'jade')
 app.use(express.static(path.join(__dirname, 'build')))
 
 rooms = null
@@ -17,7 +19,7 @@ mongodb.MongoClient.connect 'mongodb://localhost/web-game', (err, database) ->
 
 defaultRooms = ['general']
 app.get '/', (req, res) ->
-  res.sendfile('index.html')
+  res.render('index')
 
 app.get '/room/list', (req, res) ->
   res.contentType('application/json')

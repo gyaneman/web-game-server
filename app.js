@@ -1,26 +1,44 @@
-var express = require('express');
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var path = require('path');
+(function() {
+  var app, defaultRooms, express, http, io, path;
 
-app.use(express.static(path.join(__dirname, 'public')));
+  express = require('express');
 
-app.get('/', function(req, res){
-  res.sendfile('index.html');
-});
+  app = express();
 
-http.listen(3000, function(){
-  console.log('listening on *:3000');
-});
+  http = require('http').Server(app);
 
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
+  io = require('socket.io')(http);
+
+  path = require('path');
+
+  app.use(express["static"](path.join(__dirname, 'build')));
+
+  defaultRooms = ['general'];
+
+  app.get('/', function(req, res) {
+    return res.sendfile('index.html');
   });
 
-  socket.on('disconnect', function() {
-    console.log('disconnected');
+  app.get('/chat/list', function(req, res) {
+    var json, resData;
+    res.contentType('application/json');
+    resData = defaultRooms;
+    json = JSON.stringify(resData);
+    return res.send(json);
   });
-});
+
+  http.listen(3000, function() {
+    return console.log('listening on *:3000');
+  });
+
+  io.on('connection', function(socket) {
+    console.log('a user connected');
+    socket.on('chat message', function(msg) {
+      return io.emit('chat message', msg);
+    });
+    return socket.on('disconnect', function() {
+      return console.log('disconnected');
+    });
+  });
+
+}).call(this);

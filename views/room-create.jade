@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col-md-12
+        form.new-room__form(v-on="submit: clickedSubmitBtn")
+          .form-group
+            label Room Title
+            input.form-control.new-room__title(type="text", placeholder="Title", v-model="title")
+          .form-group
+            label Game Select
+            select.form-control.new-room__game(v-model="game")
+              option.new-room__game-item(v-repeat="game : gameList") {{game}}
+          .form-group
+            label Player Limit
+            select.form-control.new-room__maxNum(v-model="maxNum" number)
+              option 1
+              option 2
+              option 3
+              option 4
+              option 5
+              option 6
+              option 7
+              option 8
+          input(type="submit" value='submit')
+          //button.btn.btn-default(type="submit") Submit
+
+  script(src="/socket.io/socket.io.js")
+  script(src="/jquery-2.1.4.min.js")
+  script(src="/vue.min.js")
+  script(src="/room-create.js")
+          

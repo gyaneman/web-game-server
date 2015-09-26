@@ -1,8 +1,27 @@
 extends layout
 
 block content
-  ul#messages
-  form(action="")
-    input#m(autocomplete="off")
-    button Send
-  
+  .container
+    .row
+      .col-md-12
+        table.table.table-striped
+          tr
+            th ID
+            th Name
+            th Game
+            th p/m
+          tr(v-repeat="room : roomList")
+            td {{room.id}}
+            td {{room.name}}
+            td {{room.game}}
+            td {{room.num}}/{{room.maxNum}}
+    
+    //ul#messages
+      form(action="")
+        input#m(autocomplete="off")
+        button Send
+
+  script(src="/socket.io/socket.io.js")
+  script(src="/jquery-2.1.4.min.js")
+  script(src="/vue.min.js")
+  script(src="/index.js")

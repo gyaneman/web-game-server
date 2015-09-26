@@ -1,6 +1,6 @@
 socket = io()
 
-$.getJSON 'chat/list', (res) ->
+$.getJSON 'room/list', (res) ->
   for i in res
     console.log i
 

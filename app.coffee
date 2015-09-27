@@ -32,16 +32,19 @@ app.get '/room/list', (req, res) ->
   res.contentType('application/json')
   resData = defaultRooms
   json = JSON.stringify(resData)
-  # res.send(json)
   rooms.find().toArray (err, items) ->
     res.send(items)
 
 app.post '/room/create', (req, res) ->
-  newRoom = req.body
+  newRoom = req.body.room
   console.log newRoom
-  res.send {result: true}
-  #rooms.findOne {name: newRoomName}, (err, data) ->
-  #  console.log(data)
+  rooms.findOne {name: newRoom.name}, (err, data) ->
+    if err != null
+      res.send {result: false, error: err}
+    if data == null
+      res.send {result: true}
+    else
+      res.send {result: false}
 
 http.listen 3000, ->
   console.log('listening on *:3000')

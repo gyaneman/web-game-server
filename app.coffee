@@ -5,11 +5,25 @@ http = require('http').Server(app)
 io = require('socket.io')(http)
 path = require('path')
 mongodb = require('mongodb')
+gamesJson = require('./games.json')
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')
 app.use(express.static(path.join(__dirname, 'build')))
 app.use(bodyParser.json())
+
+loadGameScripts = (gameList) ->
+  for game in gameList
+    gamePath = './games/' + game.title + '/'
+    gameCfg = require(gamePath + 'config.json')
+    scriptName = gameCfg.serverScript
+    games[game.title] =
+      config: gameCfg
+      script: require(gamePath + scriptName)
+    console.log 'loaded: ' + gamePath
+
+games = []
+loadGameScripts gamesJson.games
 
 rooms = null
 mongodb.MongoClient.connect 'mongodb://localhost/web-game', (err, database) ->

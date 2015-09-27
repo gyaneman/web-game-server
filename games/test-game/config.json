@@ -1,0 +1,6 @@
+{
+  "title": "test-game",
+  "maxOfPeople": 4,
+  "clientScript": "test-game-client.js",
+  "serverScript": "test-game-server.js"
+}

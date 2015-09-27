@@ -11,7 +11,10 @@ block content
           .form-group
             label Game Select
             select.form-control.new-room__game(v-model="game")
-              option.new-room__game-item(v-repeat="game : gameList") {{game}}
+              // option.new-room__game-item(v-repeat="game : gameList") {{game}}
+              - for (var game in gameList) {
+                  option.new-room__game-item= gameList[game].title
+              - }
           .form-group
             label Player Limit
             select.form-control.new-room__maxNum(v-model="maxNum" number)

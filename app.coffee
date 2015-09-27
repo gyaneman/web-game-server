@@ -36,15 +36,8 @@ app.get '/room/list', (req, res) ->
     res.send(items)
 
 app.post '/room/create', (req, res) ->
-  newRoom = req.body.room
-  console.log newRoom
-  rooms.findOne {name: newRoom.name}, (err, data) ->
-    if err != null
-      res.send {result: false, error: err}
-    if data == null
-      res.send {result: true}
-    else
-      res.send {result: false}
+  res.send createRoom req.body.room
+
 
 http.listen 3000, ->
   console.log('listening on *:3000')
@@ -57,3 +50,25 @@ io.on 'connection', (socket) ->
 
   socket.on 'disconnect', ->
     console.log('disconnected');
+
+
+createRoom = (newRoomData) ->
+  if newRoomData.name == ''
+    return {result: false}
+  if newRoomData.game == ''
+    return {result: false}
+  if !(newRoomData.maxNum >= 0 && newRoomData.maxNum <= 8)
+    return {result: false}
+  rooms.findOne {name: newRoomData.name}, (err, data) ->
+    if err != null
+      return {result: false, error: err}
+    if data != null
+      return {result: false}
+  newRoom =
+    name: newRoomData.name
+    game: newRoomData.game
+    num: 0
+    maxNum: newRoomData.maxNum
+  rooms.save newRoom, ->
+    console.log newRoom
+  {result: true, room: newRoom}

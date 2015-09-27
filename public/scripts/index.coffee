@@ -7,6 +7,15 @@ vue = new Vue
 
 $.getJSON 'room/list', (res) ->
   #updateRoomList res
+  console.log res
+  for item in res
+    room =
+      id: item._id
+      name: item.name
+      game: item.game
+      num: item.num
+      maxNum: item.maxNum
+    vue.roomList.push room
 
 $('form').submit ->
   socket.emit('chat message', $('#m').val())

@@ -4,22 +4,19 @@ block content
   .container
     .row
       .col-md-12
-        table.table.table-striped
+        button.room-list__update(v-on="click: reload")
+          | Reload
+        button.room-list__join(v-on="click: join")
+          | Join Game
+        table.table
           tr
-            th ID
             th Name
             th Game
             th p/m
-          tr(v-repeat="room : roomList")
-            td {{room.id}}
-            td {{room.name}}
-            td {{room.game}}
-            td {{room.num}}/{{room.maxNum}}
-    
-    //ul#messages
-      form(action="")
-        input#m(autocomplete="off")
-        button Send
+          tr.room-list__item(v-repeat="roomList", v-on="click: selected(this)", v-class="room-list__item--active: isActive")
+            td {{name}}
+            td {{game}}
+            td {{num}}/{{maxNum}}
 
   script(src="/socket.io/socket.io.js")
   script(src="/jquery-2.1.4.min.js")

@@ -40,17 +40,30 @@ app.get '/', (req, res) ->
 
 app.get '/create', (req, res) ->
   console.log 'request: /create'
-  res.render('room-create')
+  gameList = []
+  for key,val of games
+    game =
+      title: games[key].config.title
+      maxNum: games[key].config.maxOfPeople
+    gameList.push game
+  res.render('room-create', {gameList: gameList})
 
 app.get '/room/list', (req, res) ->
   res.contentType('application/json')
-  resData = defaultRooms
-  json = JSON.stringify(resData)
   rooms.find().toArray (err, items) ->
     res.send(items)
 
 app.post '/room/create', (req, res) ->
   res.send createRoom req.body.room
+
+app.get '/game/:_id', (req, res) ->
+  rooms.findOne {_id: mongodb.ObjectID(req.params._id)}, (err, item) ->
+    if item == null
+      res.redirect '/'
+      return
+    item.num += 1
+    console.log req.params._id
+    res.render 'game', {script: '../' + games[item.game].config.clientScript}
 
 
 http.listen 3000, ->

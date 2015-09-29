@@ -19,6 +19,11 @@ $ mongo
   use web-game-server
 $ npm start
 ```
+開発始める前には
+```
+$ gulp watch
+```
+しておくと嬉しいことがあります。
 
 ## 実行環境・ライブラリなど
 * Node.js

@@ -3,4 +3,14 @@ extends layout
 block content
   h1
     | #{script}
+  
+  .chat-window
+    .chat-input
+      input
+
+  script(src="/socket.io/socket.io.js")
+  script(src="/jquery-2.1.4.min.js")
+  script(src="/vue.min.js")
+  script(src="/jquery.cookie.js")
   script(src="#{script}")
+  script(src="../game_base.js")

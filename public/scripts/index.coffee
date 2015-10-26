@@ -17,7 +17,8 @@ vue = new Vue
     join: ->
       if activeRoom == null
         return
-      joinGame(activeRoom.id)
+      # joinGame(activeRoom.id)
+      joinGame activeRoom.name
 
 $('form').submit ->
   socket.emit('chat message', $('#m').val())
@@ -29,13 +30,15 @@ socket.on 'chat message', (msg) ->
 
 updateRoomList = (list) ->
   vue.roomList = []
-  for item in list
+  console.log list
+  for key,val of list
+    console.log key, val
     room =
-      id: item._id,
-      name: item.name,
-      game: item.game,
-      num: item.num,
-      maxNum: item.maxNum,
+      # id: item._id,
+      name: val.name,
+      game: val.game,
+      num: val.num,
+      maxNum: val.maxNum,
       isActive: false
     vue.roomList.push room
 

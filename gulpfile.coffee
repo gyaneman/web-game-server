@@ -20,6 +20,8 @@ gulp.task 'coffee', ->
   gulp.src 'public/scripts/*.coffee'
     .pipe coffee()
     .pipe gulp.dest('build/')
+  gulp.src 'public/scripts/*.js'
+    .pipe gulp.dest('build/')
 
 gulp.task 'stylesheets', ->
   gulp.src ['public/stylesheets/**']

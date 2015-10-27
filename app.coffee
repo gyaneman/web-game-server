@@ -117,6 +117,7 @@ io.on 'connection', (socket) ->
     io.to(data.room).emit('joined', data)
 
   socket.on 'chat message', (msg) ->
+    console.log(msg.id, msg.room, msg.message)
     io.to(users[msg.id].room).emit('chat message', msg)
 
   socket.on 'disconnect', ->

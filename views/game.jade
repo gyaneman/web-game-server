@@ -4,9 +4,61 @@ block content
   h1
     | #{script}
   
-  .chat-window
-    .chat-input
-      input
+  .chat
+    .chat-window
+      ul.chat-log
+        li.chat-log__item.chat-log__item--mine
+          | 自分の投稿
+        li.chat-log__item.chat-log__item--others
+          | 他人の投稿
+        li.chat-log__item.chat-log__item--mine
+          | 自分の投稿
+        li.chat-log__item.chat-log__item--others
+          | 他人の投稿
+        li.chat-log__item.chat-log__item--mine
+          | 自分の投稿
+        li.chat-log__item.chat-log__item--others
+          | 他人の投稿
+        li.chat-log__item.chat-log__item--mine
+          | 自分の投稿
+        li.chat-log__item.chat-log__item--others
+          | 他人の投稿
+        li.chat-log__item.chat-log__item--mine
+          | 自分の投稿
+        li.chat-log__item.chat-log__item--others
+          | 他人の投稿
+        li.chat-log__item.chat-log__item--mine
+          | 自分の投稿
+        li.chat-log__item.chat-log__item--others
+          | 他人の投稿
+        li.chat-log__item.chat-log__item--mine
+          | 自分の投稿
+        li.chat-log__item.chat-log__item--others
+          | 他人の投稿
+        li.chat-log__item.chat-log__item--mine
+          | 自分の投稿
+        li.chat-log__item.chat-log__item--others
+          | 他人の投稿
+        li.chat-log__item.chat-log__item--mine
+          | 自分の投稿
+        li.chat-log__item.chat-log__item--others
+          | 他人の投稿
+        li.chat-log__item.chat-log__item--mine
+          | 自分の投稿
+        li.chat-log__item.chat-log__item--others
+          | 他人の投稿
+        li.chat-log__item.chat-log__item--mine
+          | 自分の投稿
+        li.chat-log__item.chat-log__item--others
+          | 他人の投稿
+        li.chat-log__item.chat-log__item--mine
+          | 自分の投稿
+        li.chat-log__item.chat-log__item--others
+          | 他人の投稿
+      form.chat-form(action="")
+        input(type="text" autocomplete="off").chat__input
+        button.chat__send-btn
+          | Send
 
   script(src="/socket.io/socket.io.js")
   script(src="/jquery-2.1.4.min.js")
